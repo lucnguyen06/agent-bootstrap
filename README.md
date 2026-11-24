@@ -1,139 +1,147 @@
 # Agent Project Bootstrap
 
-> **[English](./README.md)** | **[Tiếng Việt](./README.vi.md)**
+> **[Tiếng Việt](./README.md)** | **[English](./README.en.md)**  
+> Tổng hợp & duy trì bởi **[@lucnguyen06](https://github.com/lucnguyen06)**
 
-A lightweight, portable **AI Agent Bootstrap & Skill Router** repository that enforces **GitHub Spec Kit** (always on) and automatically selects stack-appropriate **Agent Skills** for any project — compatible with **Antigravity (Gemini), Claude Code, OpenAI Codex CLI, Gemini CLI, GitHub Copilot, Cursor, Windsurf, OpenCode, Zed, and Roo**.
-
----
-
-## Purpose — Why This Exists
-
-When working across multiple projects and multiple AI coding agents, two problems happen repeatedly:
-
-1. **Agents skip planning and jump straight into editing code**, causing architectural drift, missed edge cases, and inconsistent workflows across tools.
-2. **Loading every installed skill on every turn wastes context**, while manually copying prompt rules into every repository is tedious and quickly goes out of sync.
-
-**Agent Project Bootstrap** solves both from a **single source of truth (`AGENTS.md`)**:
-- **Always-on Spec-Driven Development**: Every AI agent checks for `.specify/` and runs the **GitHub Spec Kit** workflow before writing production code.
-- **On-Demand Stack-Based Skill Routing**: Agents inspect the repository's manifests (`package.json`, `pyproject.toml`, `Cargo.toml`, `build.gradle*`, `pom.xml`, `*.sql`, `.github/workflows/`) and read **only** the `SKILL.md` files relevant to that stack and task.
+Kho mẫu **khởi tạo & điều hướng Skills cho AI Coding Agent** gọn nhẹ, di động — bắt buộc dùng quy trình **GitHub Spec Kit** cho mọi dự án và tự động chọn đúng **Agent Skills** theo công nghệ của từng dự án. Tương thích với **Antigravity (Gemini), Claude Code, OpenAI Codex CLI, Gemini CLI, GitHub Copilot, Cursor, Windsurf, OpenCode, Zed và Roo**.
 
 ---
 
-## Who & What Is It For?
+## Mục đích — Dự án này giải quyết vấn đề gì?
 
-- **Multi-AI developers** who switch between Antigravity, Claude Code, Codex, Cursor, Windsurf, Gemini CLI, or Copilot and want identical engineering discipline across all of them.
-- **Multi-stack codebases**, covering:
-  - Web Frontend, UI/UX design systems & motion (React, Vue, Next.js, Nuxt, shadcn/ui, Tailwind)
-  - Live browser debugging, accessibility & Core Web Vitals (Chrome DevTools MCP)
-  - Native Android (Kotlin, Jetpack Compose, Material 3, Espresso) & Java (JUnit 5 + Mockito)
-  - Modern Python (`uv`, `ruff`, `ty`), idiomatic Rust, and SQL analytics
-  - Security diff reviews, insecure-default audits, and GitHub Actions CI debugging
-- **Solo engineers & teams** who want either **zero-copy global auto-loading** on their machine or a **GitHub Template** for new repositories.
+Khi làm việc trên nhiều dự án và luân phiên nhiều AI Coding Agent khác nhau, thường gặp 2 vấn đề lớn:
+
+1. **AI hay bỏ qua bước thiết kế/đặc tả và lao vào sửa code ngay**, dẫn đến lệch kiến trúc, sót edge-case và mỗi công cụ làm một kiểu.
+2. **Nạp toàn bộ 50+ skills ở mọi lượt chat sẽ làm nặng context**, còn copy thủ công file hướng dẫn vào từng dự án thì mất công và rất dễ lệch phiên bản.
+
+**Agent Project Bootstrap** giải quyết trọn vẹn cả hai từ **1 file nguồn duy nhất (`AGENTS.md`)**:
+- **Luôn bật quy trình Spec-Driven Development:** Mọi AI Agent đều phải kiểm tra `.specify/` và đi đúng quy trình **GitHub Spec Kit** trước khi viết code chính thức.
+- **Tự nhận diện stack & chỉ nạp đúng Skills cần dùng:** AI tự quét file cấu hình dự án (`package.json`, `pyproject.toml`, `Cargo.toml`, `build.gradle*`, `pom.xml`, `*.sql`, `.github/workflows/`) rồi chỉ đọc đúng các `SKILL.md` liên quan đến stack và tác vụ hiện tại.
 
 ---
 
-## Full Feature Breakdown
+## Dành cho ai & Dành cho loại dự án nào?
 
-### 1. Mandatory GitHub Spec Kit Gate (Always On)
-Defined in Section 1 of [`AGENTS.md`](./AGENTS.md):
-- Checks whether `specify` (`github/spec-kit`) is installed; provides the `uv tool install` fallback if missing.
-- Checks for `.specify/` at the project root and initializes it (`specify init --here --non-interactive --script ps`) before feature implementation.
-- Enforces the 5-stage Spec-Driven sequence for non-trivial changes:
+- **Lập trình viên dùng nhiều AI Agent cùng lúc** (Antigravity, Claude Code, Codex, Cursor, Windsurf, Gemini CLI, Copilot...) muốn tất cả AI tuân theo cùng một kỷ luật kỹ thuật.
+- **Các dự án đa nền tảng / đa ngôn ngữ**, hỗ trợ sẵn:
+  - Web Frontend, UI/UX design system & hiệu ứng chuyển động (React, Vue, Next.js, Nuxt, shadcn/ui, Tailwind)
+  - Debug trình duyệt trực tiếp, tối ưu tốc độ tải trang (LCP / Core Web Vitals) & accessibility qua Chrome DevTools MCP
+  - Android native (Kotlin, Jetpack Compose, Material 3, Espresso) & Java (JUnit 5 + Mockito)
+  - Python hiện đại (`uv`, `ruff`, `ty`), Rust chuẩn idiom, và truy vấn/báo cáo SQL
+  - Review bảo mật theo diff, kiểm tra cấu hình kém an toàn (insecure defaults), và sửa lỗi GitHub Actions CI
+- **Cá nhân hoặc nhóm phát triển** muốn dùng chế độ **tự đọc toàn máy (không cần copy vào dự án)** hoặc tạo repo mới từ **GitHub Template**.
+
+---
+
+## Chức năng chi tiết
+
+### 1. Cổng bắt buộc dùng GitHub Spec Kit (Always On)
+Quy định tại Mục 1 của [`AGENTS.md`](./AGENTS.md):
+- Kiểm tra xem máy đã cài `specify` (`github/spec-kit`) chưa; nếu thiếu sẽ có sẵn lệnh cài qua `uv tool install`.
+- Kiểm tra thư mục `.specify/` ở gốc dự án; nếu chưa có thì tự khởi tạo (`specify init --here --non-interactive --script ps`) trước khi viết tính năng mới.
+- Bắt buộc đi đủ 5 bước Spec-Driven cho mọi tính năng/thay đổi lớn:
   `Constitution` → `Specify` → `Plan` → `Tasks` → `Implement & Verify`.
 
-### 2. Automatic Stack Detection & 6-Domain Skill Router (50 Skills)
-Defined in Section 2 of [`AGENTS.md`](./AGENTS.md), routing across **13 standalone skills** and **4 plugins (37 skills)**:
+### 2. Tự động nhận diện stack & Bảng điều hướng 6 nhóm Skills (50 Skills)
+Quy định tại Mục 2 của [`AGENTS.md`](./AGENTS.md), bao phủ **13 standalone skills** và **4 plugins (37 skills)**:
 
-| Domain | Auto-Detection / Triggers | Routed Skills |
+| Nhóm công nghệ | Dấu hiệu nhận diện / Ngữ cảnh | Các Skills được điều hướng |
 | :--- | :--- | :--- |
-| **A. Universal Engineering** | Any repo (task-based: docs, planning, TDD, debugging, review, PRs) | `context7-mcp`, `grilling`, `grill-me`, `grill-with-docs`, `research`, `domain-modeling`, `codebase-design`, `improve-codebase-architecture`, `prototype`, `tdd`, `diagnosing-bugs`, `code-review`, `pr`, `wayfinder`, `triage`, `handoff`, `wizard`, `writing-for-agents` *(+ 10 workflow helpers)* |
-| **B. Security & CI/CD** | Git repos, config audits, `.github/workflows/` | `differential-review`, `insecure-defaults`, `gh-fix-ci` |
-| **C. Web Frontend, UI/UX & Motion** | `package.json`, React/Vue/Next/Nuxt/HTML/CSS/shadcn | `impeccable` *(25+ UI craft commands)*, `frontend-design`, `animate-ui`, `web-design-guidelines` |
-| **D. Browser Debugging & Web Perf** | Live web app debugging via Chrome DevTools MCP | `chrome-devtools`, `a11y-debugging`, `debug-optimize-lcp`, `cookie-debugging`, `memory-leak-debugging`, `troubleshooting` |
+| **A. Kỹ thuật phần mềm tổng quát** | Mọi dự án (tra docs thư viện, phân tích kế hoạch, TDD, debug, review code, viết PR) | `context7-mcp`, `grilling`, `grill-me`, `grill-with-docs`, `research`, `domain-modeling`, `codebase-design`, `improve-codebase-architecture`, `prototype`, `tdd`, `diagnosing-bugs`, `code-review`, `pr`, `wayfinder`, `triage`, `handoff`, `wizard`, `writing-for-agents` *(+ 10 skill phụ trợ workflow)* |
+| **B. Bảo mật & CI/CD** | Repo Git, kiểm tra cấu hình production, `.github/workflows/` | `differential-review`, `insecure-defaults`, `gh-fix-ci` |
+| **C. Web Frontend, UI/UX & Motion** | `package.json`, React/Vue/Next/Nuxt/HTML/CSS/shadcn | `impeccable` *(hơn 25 lệnh thiết kế & audit UI)*, `frontend-design`, `animate-ui`, `web-design-guidelines` |
+| **D. Debug trình duyệt & Hiệu năng Web** | Debug web live qua Chrome DevTools MCP | `chrome-devtools`, `a11y-debugging`, `debug-optimize-lcp`, `cookie-debugging`, `memory-leak-debugging`, `troubleshooting` |
 | **E. Android, Kotlin & Java** | `build.gradle*`, `AndroidManifest.xml`, `pom.xml` | `android-native-dev`, `android-cli`, `compose-preview`, `android-device-hub`, `espresso-skill`, `junit-5-skill` |
-| **F. Python, Rust & SQL** | `pyproject.toml`, `Cargo.toml`, `*.sql`, data reporting | `modern-python`, `rust-best-practices`, `sql-queries` |
+| **F. Python, Rust & SQL** | `pyproject.toml`, `Cargo.toml`, `*.sql`, báo cáo dữ liệu | `modern-python`, `rust-best-practices`, `sql-queries` |
 
-### 3. Single-Source Multi-Agent Global Sync (`sync-global.ps1`)
-Synchronizes `AGENTS.md` to all global AI agent instruction paths on Windows in one command — so **every project on your machine auto-loads it without copying files into repos**:
+### 3. Đồng bộ Global đa AI Agent bằng 1 lệnh (`sync-global.ps1`)
+Đồng bộ cùng một file `AGENTS.md` tới đường dẫn cấu hình global của 5 AI Agent trên Windows — giúp **mọi dự án trên máy tự động áp dụng mà không cần copy file vào từng thư mục dự án**:
 - **Antigravity (Global Plugin):** `~/.gemini/config/plugins/agent-bootstrap/rules/AGENTS.md`
 - **Gemini CLI:** `~/.gemini/GEMINI.md`
 - **Claude Code:** `~/.claude/CLAUDE.md`
 - **OpenAI Codex CLI:** `~/.codex/AGENTS.md`
 - **GitHub Copilot CLI:** `~/.copilot/copilot-instructions.md`
 
-### 4. Full Upstream Source & Reinstall Manifest (`SKILLS-SOURCES.md`)
-Lists the verified upstream GitHub repository and install command for GitHub Spec Kit, all 4 plugins, and all 13 standalone skills — making it easy for both humans and AI agents to install missing skills on a fresh machine.
+### 4. Danh mục nguồn gốc & lệnh cài lại (`SKILLS-SOURCES.md`)
+Lưu đầy đủ link GitHub gốc và lệnh cài đặt cho GitHub Spec Kit, 4 plugins, 13 standalone skills và kho tuyển chọn `VoltAgent/awesome-agent-skills` — giúp bạn (hoặc AI Agent) dễ dàng cài lại đầy đủ khi chuyển sang máy mới.
 
-### 5. Cross-Agent Project Entry Points (`AGENTS.md` + `CLAUDE.md`)
-- `AGENTS.md` is natively read by Antigravity, Codex, Cursor, Windsurf, Copilot, OpenCode, Zed, and Roo.
-- `CLAUDE.md` contains a single `@AGENTS.md` directive so Claude Code reads the exact same file with zero duplication.
+### 5. Tương thích đa AI trong cùng dự án (`AGENTS.md` + `CLAUDE.md`)
+- `AGENTS.md` được đọc trực tiếp bởi Antigravity, Codex, Cursor, Windsurf, Copilot, OpenCode, Zed, Roo.
+- `CLAUDE.md` chỉ chứa 1 dòng `@AGENTS.md` để Claude Code tự đọc chung 1 nguồn, không bị trùng lặp nội dung.
 
 ---
 
-## Repository Structure
+## Cấu trúc thư mục
 
-| File | Role |
+| File | Vai trò |
 | :--- | :--- |
-| [`AGENTS.md`](./AGENTS.md) | Core Spec Kit gate + compact 6-domain Skill Routing Matrix (loaded by AI agents). |
-| [`CLAUDE.md`](./CLAUDE.md) | 1-line `@AGENTS.md` pointer for Claude Code. |
-| [`SKILLS-SOURCES.md`](./SKILLS-SOURCES.md) | Upstream GitHub URLs and install commands for Spec Kit, plugins, and standalone skills. |
-| [`sync-global.ps1`](./sync-global.ps1) | PowerShell script that syncs `AGENTS.md` to 5 global AI agent config locations. |
-| [`README.md`](./README.md) | English documentation (this file). |
-| [`README.vi.md`](./README.vi.md) | Vietnamese documentation. |
+| [`AGENTS.md`](./AGENTS.md) | File chính chứa quy trình Spec Kit bắt buộc + bảng điều hướng 6 nhóm skills (AI sẽ đọc file này). |
+| [`CLAUDE.md`](./CLAUDE.md) | File trỏ 1 dòng `@AGENTS.md` dành cho Claude Code. |
+| [`SKILLS-SOURCES.md`](./SKILLS-SOURCES.md) | Link repo gốc và lệnh cài đặt cho Spec Kit, plugins và toàn bộ skills. |
+| [`sync-global.ps1`](./sync-global.ps1) | Script PowerShell đồng bộ `AGENTS.md` ra cấu hình global của 5 AI Agent. |
+| [`README.md`](./README.md) | Tài liệu hướng dẫn chính (Tiếng Việt — file này). |
+| [`README.en.md`](./README.en.md) | Tài liệu hướng dẫn bản tiếng Anh. |
 
 ---
 
-## Getting Started on a New Machine
+## Cài đặt trên máy mới
 
-1. **Install GitHub Spec Kit** (requires `uv`):
+1. **Cài GitHub Spec Kit** (cần có `uv`):
    ```powershell
    uv tool install specify-cli --from git+https://github.com/github/spec-kit.git
    ```
-2. **Install the skills/plugins you need** using the commands in [`SKILLS-SOURCES.md`](./SKILLS-SOURCES.md).
-3. **Choose how you want projects to load `AGENTS.md`** (pick one or combine all three below).
+2. **Cài các skills/plugins cần dùng** theo danh sách lệnh trong [`SKILLS-SOURCES.md`](./SKILLS-SOURCES.md).
+3. **Chọn 1 trong 3 cách dùng bên dưới** (hoặc kết hợp cả 3).
 
 ---
 
-## Usage
+## Cách sử dụng
 
-### Option 1: Zero-Copy Global Mode (All Projects on Your Machine)
-Clone this repo and run `sync-global.ps1` once (re-run whenever you update `AGENTS.md`):
+### Cách 1: Tự đọc toàn máy — Không cần copy vào từng dự án (Khuyên dùng)
+Clone repo này và chạy `sync-global.ps1` một lần (chạy lại mỗi khi bạn sửa `AGENTS.md`):
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File .\sync-global.ps1
 ```
-All supported global agents (Antigravity, Gemini CLI, Claude Code, Codex CLI, Copilot CLI) will automatically read `AGENTS.md` in every project without adding files to your project repositories.
+Các AI hỗ trợ cấu hình global (Antigravity, Gemini CLI, Claude Code, Codex CLI, Copilot CLI) sẽ tự động nạp `AGENTS.md` ở mọi dự án mà thư mục dự án không cần thêm file nào.
 
-### Option 2: Create a New Project from This GitHub Template
-Click **Use this template** on GitHub, or run:
+### Cách 2: Tạo dự án mới từ GitHub Template
+Bấm **Use this template** trên GitHub hoặc chạy:
 
 ```powershell
-gh repo create my-new-project --template lucnguyen06/agent-bootstrap --private --clone
+gh repo create ten-du-an-moi --template lucnguyen06/agent-bootstrap --private --clone
 ```
 
-### Option 3: Drop into an Existing Project (for Cursor / Windsurf / Team Repos)
-Pull `AGENTS.md` and `CLAUDE.md` directly into any repository root via GitHub CLI:
+### Cách 3: Thả nhanh vào dự án có sẵn (dành cho Cursor / Windsurf / repo nhóm)
+Kéo thẳng `AGENTS.md` và `CLAUDE.md` vào thư mục gốc dự án bằng GitHub CLI:
 
 ```powershell
 gh api repos/lucnguyen06/agent-bootstrap/contents/AGENTS.md -H "Accept: application/vnd.github.raw" | Set-Content -Encoding utf8 AGENTS.md
 gh api repos/lucnguyen06/agent-bootstrap/contents/CLAUDE.md -H "Accept: application/vnd.github.raw" | Set-Content -Encoding utf8 CLAUDE.md
 ```
-*(Or run `bootstrap-agents` if you installed the local PATH helper.)*
+*(Hoặc gõ `bootstrap-agents` nếu máy đã cài lệnh helper trên PATH.)*
 
 ---
 
-## First-Session Tip
+## Mẹo nhỏ cho phiên chat đầu tiên ở mỗi dự án
 
-To make sure any AI agent initializes Spec Kit and picks the right skills before touching code, start the first session in a project with:
+Để chắc chắn bất kỳ AI Agent nào cũng khởi tạo Spec Kit và chọn đúng skills trước khi động vào code, hãy mở màn phiên đầu tiên bằng câu:
 
-> *"Read `AGENTS.md`, initialize Spec Kit if `.specify/` is missing, inspect the current `src/` structure, and list the matching skills for this project."*
+> *"Đọc `AGENTS.md`, khởi tạo Spec Kit nếu chưa có, quét `src` hiện tại và cho tôi biết các skills phù hợp với dự án này."*
 
-Once `.specify/` is initialized, subsequent sessions can proceed directly with normal tasks.
+Sau khi `.specify/` đã được khởi tạo, các lượt chat tiếp theo bạn chỉ cần giao việc bình thường.
 
 ---
 
-## Updating Rules & Skills
+## Cập nhật khi thêm skill hoặc sửa quy trình
 
-1. Edit [`AGENTS.md`](./AGENTS.md) (and [`SKILLS-SOURCES.md`](./SKILLS-SOURCES.md) if adding a new skill).
-2. Run `.\sync-global.ps1` to update all global AI agents on your machine.
-3. Commit and push to keep the GitHub template up to date.
+1. Sửa [`AGENTS.md`](./AGENTS.md) (và bổ sung nguồn vào [`SKILLS-SOURCES.md`](./SKILLS-SOURCES.md) nếu có skill mới).
+2. Chạy `.\sync-global.ps1` để cập nhật đồng loạt toàn bộ AI Agent trên máy.
+3. Commit và push lên GitHub để đồng bộ bản Template.
+
+---
+
+## Tác giả tổng hợp & Nguồn ghi công
+
+- **Người tổng hợp & duy trì:** [@lucnguyen06](https://github.com/lucnguyen06)
+- **Nguồn gốc các skills & công cụ:** Toàn bộ bản quyền và mã nguồn từng skill/plugin thuộc về tác giả gốc (GitHub Spec Kit, Matt Pocock, Upstash Context7, Chrome DevTools, Anthropic, OpenAI, Vercel Labs, Trail of Bits, Paul Bakaus / Impeccable, imskyleen / Animate UI, Apollo GraphQL, TestMu AI / LambdaTest, MiniMax AI, pm-skills, VoltAgent). Xem chi tiết từng nguồn tại [`SKILLS-SOURCES.md`](./SKILLS-SOURCES.md).
