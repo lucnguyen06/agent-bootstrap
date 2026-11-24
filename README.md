@@ -31,3 +31,14 @@ Or pull directly via GitHub CLI:
 gh api repos/lucnguyen06/agent-bootstrap/contents/AGENTS.md -H "Accept: application/vnd.github.raw" | Set-Content -Encoding utf8 AGENTS.md
 gh api repos/lucnguyen06/agent-bootstrap/contents/CLAUDE.md -H "Accept: application/vnd.github.raw" | Set-Content -Encoding utf8 CLAUDE.md
 ```
+
+## First-Session Tip (Mẹo cho phiên chat đầu tiên ở mỗi dự án)
+
+To make sure any AI agent initializes Spec Kit and picks the right skills before touching code, start the first session in a project with:
+
+- **English:**
+  > *"Read `AGENTS.md`, initialize Spec Kit if `.specify/` is missing, inspect the current `src/` structure, and list the matching skills for this project."*
+- **Tiếng Việt:**
+  > *"Đọc `AGENTS.md`, khởi tạo Spec Kit nếu chưa có, quét `src` hiện tại và cho tôi biết các skills phù hợp với dự án này."*
+
+Once `.specify/` is initialized, subsequent sessions can dive straight into normal tasks.
