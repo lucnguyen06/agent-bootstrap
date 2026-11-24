@@ -40,3 +40,11 @@ Upstream repositories and install references for every tool, plugin, and skill r
 | **`junit-5-skill`** | Java Testing | https://github.com/LambdaTest/agent-skills | `npx skills add LambdaTest/agent-skills --skill junit-5-skill` |
 | **`android-native-dev`** | Android / Kotlin | https://github.com/MiniMax-AI/skills | Folder `skills/android-native-dev` |
 | **`sql-queries`** | Database / SQL | https://github.com/phuryn/pm-skills | Folder `pm-data-analytics/skills/sql-queries` |
+
+---
+
+## 4. Curated Skill Directory (Discovery Source)
+
+Most standalone skills above were curated from the community directory below. Use it to discover and install additional skills for new stacks:
+
+- **Awesome Agent Skills (VoltAgent):** https://github.com/VoltAgent/awesome-agent-skills *(1,000+ community & official agent skills across Claude Code, Antigravity/Gemini, Codex, Cursor, Copilot, Windsurf)*
