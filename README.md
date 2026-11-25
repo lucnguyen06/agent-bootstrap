@@ -24,7 +24,7 @@ Khi làm việc trên nhiều dự án và luân phiên nhiều AI Coding Agent 
 
 - **Lập trình viên dùng nhiều AI Agent cùng lúc** (Antigravity, Claude Code, Codex, Cursor, Windsurf, Gemini CLI, Copilot...) muốn tất cả AI tuân theo cùng một kỷ luật kỹ thuật.
 - **Các dự án đa nền tảng / đa ngôn ngữ**, hỗ trợ sẵn:
-  - Web Frontend, UI/UX design system & hiệu ứng chuyển động (React, Vue, Next.js, Nuxt, shadcn/ui, Tailwind)
+  - Web Frontend, UI/UX design system & hiệu ứng chuyển động (React, Vue, Next.js, Nuxt, shadcn/ui, Astryx, Tailwind)
   - Debug trình duyệt trực tiếp, tối ưu tốc độ tải trang (LCP / Core Web Vitals) & accessibility qua Chrome DevTools MCP
   - Android native (Kotlin, Jetpack Compose, Material 3, Espresso) & Java (JUnit 5 + Mockito)
   - Python hiện đại (`uv`, `ruff`, `ty`), Rust chuẩn idiom, và truy vấn/báo cáo SQL
@@ -42,14 +42,14 @@ Quy định tại Mục 1 của [`AGENTS.md`](./AGENTS.md):
 - Bắt buộc đi đủ 5 bước Spec-Driven cho mọi tính năng/thay đổi lớn:
   `Constitution` → `Specify` → `Plan` → `Tasks` → `Implement & Verify`.
 
-### 2. Tự động nhận diện stack & Bảng điều hướng 6 nhóm Skills (50 Skills)
-Quy định tại Mục 2 của [`AGENTS.md`](./AGENTS.md), bao phủ **13 standalone skills** và **4 plugins (37 skills)**:
+### 2. Tự động nhận diện stack & Bảng điều hướng 6 nhóm Skills (51 Skills)
+Quy định tại Mục 2 của [`AGENTS.md`](./AGENTS.md), bao phủ **14 standalone skills** và **4 plugins (37 skills)**:
 
 | Nhóm công nghệ | Dấu hiệu nhận diện / Ngữ cảnh | Các Skills được điều hướng |
 | :--- | :--- | :--- |
 | **A. Kỹ thuật phần mềm tổng quát** | Mọi dự án (tra docs thư viện, phân tích kế hoạch, TDD, debug, review code, viết PR) | `context7-mcp`, `grilling`, `grill-me`, `grill-with-docs`, `research`, `domain-modeling`, `codebase-design`, `improve-codebase-architecture`, `prototype`, `tdd`, `diagnosing-bugs`, `code-review`, `pr`, `wayfinder`, `triage`, `handoff`, `wizard`, `writing-for-agents` *(+ 10 skill phụ trợ workflow)* |
 | **B. Bảo mật & CI/CD** | Repo Git, kiểm tra cấu hình production, `.github/workflows/` | `differential-review`, `insecure-defaults`, `gh-fix-ci` |
-| **C. Web Frontend, UI/UX & Motion** | `package.json`, React/Vue/Next/Nuxt/HTML/CSS/shadcn | `impeccable` *(hơn 25 lệnh thiết kế & audit UI)*, `frontend-design`, `animate-ui`, `web-design-guidelines` |
+| **C. Web Frontend, UI/UX & Motion** | `package.json`, React/Vue/Next/Nuxt/HTML/CSS/shadcn/Astryx | `impeccable` *(hơn 25 lệnh thiết kế & audit UI)*, `frontend-design`, `animate-ui`, `web-design-guidelines`, `astryx` |
 | **D. Debug trình duyệt & Hiệu năng Web** | Debug web live qua Chrome DevTools MCP | `chrome-devtools`, `a11y-debugging`, `debug-optimize-lcp`, `cookie-debugging`, `memory-leak-debugging`, `troubleshooting` |
 | **E. Android, Kotlin & Java** | `build.gradle*`, `AndroidManifest.xml`, `pom.xml` | `android-native-dev`, `android-cli`, `compose-preview`, `android-device-hub`, `espresso-skill`, `junit-5-skill` |
 | **F. Python, Rust & SQL** | `pyproject.toml`, `Cargo.toml`, `*.sql`, báo cáo dữ liệu | `modern-python`, `rust-best-practices`, `sql-queries` |
@@ -63,7 +63,7 @@ Quy định tại Mục 2 của [`AGENTS.md`](./AGENTS.md), bao phủ **13 stand
 - **GitHub Copilot CLI:** `~/.copilot/copilot-instructions.md`
 
 ### 4. Danh mục nguồn gốc & lệnh cài lại (`SKILLS-SOURCES.md`)
-Lưu đầy đủ link GitHub gốc và lệnh cài đặt cho GitHub Spec Kit, 4 plugins, 13 standalone skills và kho tuyển chọn `VoltAgent/awesome-agent-skills` — giúp bạn (hoặc AI Agent) dễ dàng cài lại đầy đủ khi chuyển sang máy mới.
+Lưu đầy đủ link GitHub gốc và lệnh cài đặt cho GitHub Spec Kit, 4 plugins, 14 standalone skills và kho tuyển chọn `VoltAgent/awesome-agent-skills` — giúp bạn (hoặc AI Agent) dễ dàng cài lại đầy đủ khi chuyển sang máy mới.
 
 ### 5. Tương thích đa AI trong cùng dự án (`AGENTS.md` + `CLAUDE.md`)
 - `AGENTS.md` được đọc trực tiếp bởi Antigravity, Codex, Cursor, Windsurf, Copilot, OpenCode, Zed, Roo.
@@ -144,4 +144,4 @@ Sau khi `.specify/` đã được khởi tạo, các lượt chat tiếp theo b�
 ## Tác giả tổng hợp & Nguồn ghi công
 
 - **Người tổng hợp & duy trì:** [@lucnguyen06](https://github.com/lucnguyen06)
-- **Nguồn gốc các skills & công cụ:** Toàn bộ bản quyền và mã nguồn từng skill/plugin thuộc về tác giả gốc (GitHub Spec Kit, Matt Pocock, Upstash Context7, Chrome DevTools, Anthropic, OpenAI, Vercel Labs, Trail of Bits, Paul Bakaus / Impeccable, imskyleen / Animate UI, Apollo GraphQL, TestMu AI / LambdaTest, MiniMax AI, pm-skills, VoltAgent). Xem chi tiết từng nguồn tại [`SKILLS-SOURCES.md`](./SKILLS-SOURCES.md).
+- **Nguồn gốc các skills & công cụ:** Toàn bộ bản quyền và mã nguồn từng skill/plugin thuộc về tác giả gốc (GitHub Spec Kit, Matt Pocock, Upstash Context7, Chrome DevTools, Anthropic, OpenAI, Vercel Labs, Trail of Bits, Paul Bakaus / Impeccable, imskyleen / Animate UI, Meta (Astryx), Apollo GraphQL, TestMu AI / LambdaTest, MiniMax AI, pm-skills, VoltAgent). Xem chi tiết từng nguồn tại [`SKILLS-SOURCES.md`](./SKILLS-SOURCES.md).

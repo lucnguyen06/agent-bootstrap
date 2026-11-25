@@ -31,6 +31,7 @@ Upstream repositories and install references for every tool, plugin, and skill r
 | **`animate-ui`** | Frontend / Motion | https://github.com/imskyleen/animate-ui | `npx skills add imskyleen/animate-ui` |
 | **`frontend-design`** | Frontend / UI-UX | https://github.com/anthropics/skills | `npx skills add anthropics/skills --skill frontend-design` |
 | **`web-design-guidelines`** | Frontend / Audit | https://github.com/vercel-labs/agent-skills | `npx skills add vercel-labs/agent-skills --skill web-design-guidelines` |
+| **`astryx`** | Frontend / Design System | https://github.com/meta/astryx | `npm install -g @astryxdesign/cli` + folder `plugins/astryx/skills/astryx` |
 | **`differential-review`** | Security / Review | https://github.com/trailofbits/skills | `npx skills add trailofbits/skills --skill differential-review` |
 | **`insecure-defaults`** | Security / Audit | https://github.com/trailofbits/skills | `npx skills add trailofbits/skills --skill insecure-defaults` |
 | **`modern-python`** | Python | https://github.com/trailofbits/skills | `npx skills add trailofbits/skills --skill modern-python` |

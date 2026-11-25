@@ -24,7 +24,7 @@ When working across multiple projects and multiple AI coding agents, two problem
 
 - **Multi-AI developers** who switch between Antigravity, Claude Code, Codex, Cursor, Windsurf, Gemini CLI, or Copilot and want identical engineering discipline across all of them.
 - **Multi-stack codebases**, covering:
-  - Web Frontend, UI/UX design systems & motion (React, Vue, Next.js, Nuxt, shadcn/ui, Tailwind)
+  - Web Frontend, UI/UX design systems & motion (React, Vue, Next.js, Nuxt, shadcn/ui, Astryx, Tailwind)
   - Live browser debugging, accessibility & Core Web Vitals (Chrome DevTools MCP)
   - Native Android (Kotlin, Jetpack Compose, Material 3, Espresso) & Java (JUnit 5 + Mockito)
   - Modern Python (`uv`, `ruff`, `ty`), idiomatic Rust, and SQL analytics
@@ -42,14 +42,14 @@ Defined in Section 1 of [`AGENTS.md`](./AGENTS.md):
 - Enforces the 5-stage Spec-Driven sequence for non-trivial changes:
   `Constitution` → `Specify` → `Plan` → `Tasks` → `Implement & Verify`.
 
-### 2. Automatic Stack Detection & 6-Domain Skill Router (50 Skills)
-Defined in Section 2 of [`AGENTS.md`](./AGENTS.md), routing across **13 standalone skills** and **4 plugins (37 skills)**:
+### 2. Automatic Stack Detection & 6-Domain Skill Router (51 Skills)
+Defined in Section 2 of [`AGENTS.md`](./AGENTS.md), routing across **14 standalone skills** and **4 plugins (37 skills)**:
 
 | Domain | Auto-Detection / Triggers | Routed Skills |
 | :--- | :--- | :--- |
 | **A. Universal Engineering** | Any repo (task-based: docs, planning, TDD, debugging, review, PRs) | `context7-mcp`, `grilling`, `grill-me`, `grill-with-docs`, `research`, `domain-modeling`, `codebase-design`, `improve-codebase-architecture`, `prototype`, `tdd`, `diagnosing-bugs`, `code-review`, `pr`, `wayfinder`, `triage`, `handoff`, `wizard`, `writing-for-agents` *(+ 10 workflow helpers)* |
 | **B. Security & CI/CD** | Git repos, config audits, `.github/workflows/` | `differential-review`, `insecure-defaults`, `gh-fix-ci` |
-| **C. Web Frontend, UI/UX & Motion** | `package.json`, React/Vue/Next/Nuxt/HTML/CSS/shadcn | `impeccable` *(25+ UI craft commands)*, `frontend-design`, `animate-ui`, `web-design-guidelines` |
+| **C. Web Frontend, UI/UX & Motion** | `package.json`, React/Vue/Next/Nuxt/HTML/CSS/shadcn/Astryx | `impeccable` *(25+ UI craft commands)*, `frontend-design`, `animate-ui`, `web-design-guidelines`, `astryx` |
 | **D. Browser Debugging & Web Perf** | Live web app debugging via Chrome DevTools MCP | `chrome-devtools`, `a11y-debugging`, `debug-optimize-lcp`, `cookie-debugging`, `memory-leak-debugging`, `troubleshooting` |
 | **E. Android, Kotlin & Java** | `build.gradle*`, `AndroidManifest.xml`, `pom.xml` | `android-native-dev`, `android-cli`, `compose-preview`, `android-device-hub`, `espresso-skill`, `junit-5-skill` |
 | **F. Python, Rust & SQL** | `pyproject.toml`, `Cargo.toml`, `*.sql`, data reporting | `modern-python`, `rust-best-practices`, `sql-queries` |
@@ -63,7 +63,7 @@ Synchronizes `AGENTS.md` to all global AI agent instruction paths on Windows in 
 - **GitHub Copilot CLI:** `~/.copilot/copilot-instructions.md`
 
 ### 4. Full Upstream Source & Reinstall Manifest (`SKILLS-SOURCES.md`)
-Lists the verified upstream GitHub repository and install command for GitHub Spec Kit, all 4 plugins, all 13 standalone skills, and the `VoltAgent/awesome-agent-skills` discovery catalog — making it easy for both humans and AI agents to install missing skills on a fresh machine.
+Lists the verified upstream GitHub repository and install command for GitHub Spec Kit, all 4 plugins, all 14 standalone skills, and the `VoltAgent/awesome-agent-skills` discovery catalog — making it easy for both humans and AI agents to install missing skills on a fresh machine.
 
 ### 5. Cross-Agent Project Entry Points (`AGENTS.md` + `CLAUDE.md`)
 - `AGENTS.md` is natively read by Antigravity, Codex, Cursor, Windsurf, Copilot, OpenCode, Zed, and Roo.
@@ -144,4 +144,4 @@ Once `.specify/` is initialized, subsequent sessions can proceed directly with n
 ## Curator & Credits
 
 - **Curated & maintained by:** [@lucnguyen06](https://github.com/lucnguyen06)
-- **Upstream credits:** All individual skills, plugins, and CLIs belong to their respective upstream authors (GitHub Spec Kit, Matt Pocock, Upstash Context7, Chrome DevTools, Anthropic, OpenAI, Vercel Labs, Trail of Bits, Paul Bakaus / Impeccable, imskyleen / Animate UI, Apollo GraphQL, TestMu AI / LambdaTest, MiniMax AI, pm-skills, VoltAgent). See [`SKILLS-SOURCES.md`](./SKILLS-SOURCES.md) for the full list of upstream repositories.
+- **Upstream credits:** All individual skills, plugins, and CLIs belong to their respective upstream authors (GitHub Spec Kit, Matt Pocock, Upstash Context7, Chrome DevTools, Anthropic, OpenAI, Vercel Labs, Trail of Bits, Paul Bakaus / Impeccable, imskyleen / Animate UI, Meta (Astryx), Apollo GraphQL, TestMu AI / LambdaTest, MiniMax AI, pm-skills, VoltAgent). See [`SKILLS-SOURCES.md`](./SKILLS-SOURCES.md) for the full list of upstream repositories.
